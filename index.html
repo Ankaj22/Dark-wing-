@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DarkWing — Free Cinema</title>
+<style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#07080d;color:#f4f5f7;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}.nav{height:72px;display:flex;align-items:center;gap:30px;padding:0 5%;position:sticky;top:0;z-index:10;background:rgba(7,8,13,.9);backdrop-filter:blur(16px);border-bottom:1px solid #171923}.logo{font-size:22px;font-weight:900;letter-spacing:2px}.logo span{color:#8d6cff}.nav nav{display:flex;gap:20px}.nav a{color:#aeb2c0;text-decoration:none}.nav a:hover{color:#fff}.actions{margin-left:auto;display:flex;gap:10px}.actions input{width:210px;background:#11131c;border:1px solid #262938;color:white;border-radius:10px;padding:10px 12px}.actions button,.liveCard button{background:#8d6cff;color:white;border:0;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer}.hero{min-height:620px;padding:120px 8%;display:flex;align-items:center;background:radial-gradient(circle at 75% 40%,#35256d 0,transparent 34%),linear-gradient(90deg,#07080d 20%,rgba(7,8,13,.75)),url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1800&q=80') center/cover}.eyebrow{color:#9a7cff;font-weight:800;letter-spacing:3px}.hero h1{font-size:clamp(48px,7vw,88px);line-height:.95;margin:15px 0}.hero h1 span{color:#9a7cff}.sub{max-width:520px;color:#b8bcc9;font-size:18px;line-height:1.6}.heroBtns{display:flex;gap:12px;margin-top:28px}.primary,.secondary{padding:13px 20px;border-radius:11px;text-decoration:none;font-weight:800}.primary{background:#8d6cff;color:white}.secondary{border:1px solid #353848;color:white}.section{padding:60px 5%}.sectionHead{display:flex;justify-content:space-between;align-items:center}.section h2{font-size:30px}.sectionHead span{color:#777d8e}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:20px}.card{background:#10121a;border:1px solid #1d202c;border-radius:14px;overflow:hidden;cursor:pointer;transition:.2s}.card:hover{transform:translateY(-5px);border-color:#51458a}.poster{height:270px;background:#191c28 center/cover}.info{padding:13px}.info h3{margin:0 0 6px;font-size:16px}.muted{color:#858b9c;font-size:13px}.liveCard{display:flex;align-items:center;gap:16px;background:#10121a;border:1px solid #1d202c;border-radius:15px;padding:20px}.liveCard p{margin:5px 0;color:#858b9c}.liveCard button{margin-left:auto}.liveDot{width:12px;height:12px;background:#ff4d67;border-radius:50%;box-shadow:0 0 16px #ff4d67}.about{color:#aeb2c0;line-height:1.7;max-width:900px}.modal{position:fixed;inset:0;background:rgba(0,0,0,.8);display:grid;place-items:center;padding:20px;z-index:30}.hidden{display:none}.modalBox{position:relative;background:#10121a;border:1px solid #292d3d;border-radius:18px;width:min(850px,100%);padding:30px}.close{position:absolute;right:15px;top:10px;background:none;border:0;color:white;font-size:30px;cursor:pointer}.adminForm{display:grid;gap:12px}.adminForm input,.adminForm textarea{background:#080a10;color:white;border:1px solid #2a2e3d;padding:12px;border-radius:9px}.adminForm button{background:#8d6cff;color:white;border:0;padding:12px;border-radius:9px;font-weight:800;cursor:pointer}@media(max-width:760px){.nav nav{display:none}.actions input{width:130px}.hero{min-height:520px;padding:80px 7%}.grid{grid-template-columns:repeat(2,1fr)}.poster{height:220px}.liveCard{align-items:flex-start;flex-wrap:wrap}.liveCard button{margin-left:0}}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="logo">DARK<span>WING</span></div>
+  <nav><a href="#home">Home</a><a href="#browse">Browse</a><a href="#live">Live</a><a href="#about">About</a></nav>
+  <div class="actions"><input id="search" placeholder="Search titles..."><button id="adminBtn">Admin</button></div>
+</header>
+<main id="home">
+<section class="hero"><div><p class="eyebrow">YOUR FREE CINEMA</p><h1>Watch what<br><span>moves you.</span></h1><p class="sub">A clean Netflix-inspired streaming dashboard for your own or licensed video library.</p><div class="heroBtns"><a class="primary" href="#browse">Browse Library</a><a class="secondary" href="#about">How it works</a></div></div></section>
+<section id="browse" class="section"><div class="sectionHead"><h2>Featured</h2><span id="count"></span></div><div id="grid" class="grid"></div></section>
+<section id="live" class="section"><div class="sectionHead"><h2>Live</h2></div><div class="liveCard"><div class="liveDot"></div><div><b>Live channel</b><p>Add your own licensed live stream URL from the Admin panel.</p></div><button onclick="alert('Connect a licensed live-stream URL in the production backend.')">Open player</button></div></section>
+<section id="about" class="section about"><h2>DarkWing</h2><p>This starter is designed for movies and videos you own, public-domain works, or content you are licensed to distribute. It contains no ads and no user payment system.</p></section>
+</main>
+<div id="modal" class="modal hidden"><div class="modalBox"><button class="close" onclick="closeModal()">×</button><div id="modalBody"></div></div></div>
+<script>
+let movies=[];
+const modal=document.getElementById('modal'), body=document.getElementById('modalBody');
+async function load(){ const r=await fetch('/api/movies'); movies=await r.json(); render(); }
+function render(q=''){
+ const list=movies.filter(m=>(m.title+' '+m.genre+' '+m.year).toLowerCase().includes(q.toLowerCase()));
+ document.getElementById('count').textContent=list.length+' titles';
+ document.getElementById('grid').innerHTML=list.map(m=>`<article class="card" onclick="watch('${m.id}')"><div class="poster" style="background-image:url('${m.poster||''}')"></div><div class="info"><h3>${escapeHtml(m.title)}</h3><div class="muted">${escapeHtml(m.year)} • ${escapeHtml(m.genre)}</div></div></article>`).join('')||'<p>No titles found.</p>';
+}
+function escapeHtml(x){return String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function watch(id){const m=movies.find(x=>x.id===id); body.innerHTML=`<div class="poster" style="height:360px;background-image:url('${m.poster||''}')"></div><h2>${escapeHtml(m.title)}</h2><p class="muted">${escapeHtml(m.year)} • ${escapeHtml(m.genre)}</p>${m.video?`<video controls style="width:100%;max-height:420px;background:#000;border-radius:10px" src="${m.video}"></video><div style="margin-top:12px"><a class="primary" href="/download/${m.id}">Download</a></div>`:'<p class="muted">No video uploaded yet.</p>'}`; modal.classList.remove('hidden');}
+function closeModal(){modal.classList.add('hidden');}
+async function admin(){
+ body.innerHTML=`<h2>DarkWing Admin</h2><p class="muted">Upload and manage your own/licensed media.</p><input id="pw" type="password" placeholder="Admin password" style="width:100%;padding:12px;margin:8px 0"><button onclick="loginAdmin()" style="padding:12px 18px">Continue</button>`; modal.classList.remove('hidden');
+}
+async function loginAdmin(){
+ const r=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:document.getElementById('pw').value})});
+ if(!r.ok){alert('Wrong password');return;} const d=await r.json(); localStorage.setItem('dw_token',d.token); adminPanel();
+}
+function adminPanel(){body.innerHTML=`<h2>DarkWing Admin</h2><form id="form"><input name="title" required placeholder="Movie title"><input name="year" placeholder="Year"><input name="genre" placeholder="Genre"><label>Poster <input name="poster" type="file" accept="image/*"></label><label>Video <input name="video" type="file" accept="video/*"></label><button type="submit">Upload to library</button></form><hr><div id="adminList">${movies.map(m=>`<p><b>${escapeHtml(m.title)}</b> <button onclick="delMovie('${m.id}')">Delete</button></p>`).join('')}</div>`;
+ document.getElementById('form').onsubmit=async e=>{e.preventDefault();const fd=new FormData(e.target);const r=await fetch('/api/movies',{method:'POST',headers:{Authorization:'Bearer '+localStorage.getItem('dw_token')},body:fd});if(!r.ok){alert((await r.json()).error||'Upload failed');return;}await load();adminPanel();};
+}
+async function delMovie(id){const r=await fetch('/api/movies/'+id,{method:'DELETE',headers:{Authorization:'Bearer '+localStorage.getItem('dw_token')}});if(r.ok){await load();adminPanel();}else alert('Delete failed');}
+document.getElementById('search').oninput=e=>render(e.target.value);document.getElementById('adminBtn').onclick=admin;load();
+</script>
+</body>
+</html>

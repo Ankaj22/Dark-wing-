@@ -17,7 +17,7 @@ if (!fs.existsSync(DB)) fs.writeFileSync(DB, '[]');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.get('/', (_req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 const storage = multer.diskStorage({
   destination: (_req, _file, cb) => cb(null, UPLOAD_DIR),
   filename: (_req, file, cb) => {

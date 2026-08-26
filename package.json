@@ -1,0 +1,9 @@
+{
+  "name": "darkwing-streaming-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DarkWing streaming library with admin upload, watch and download features for owned/licensed media.",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "dependencies": { "express": "^5.1.0", "multer": "^2.0.2" }
+}

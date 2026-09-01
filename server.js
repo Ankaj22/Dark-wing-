@@ -29,8 +29,30 @@ const upload = multer({
   storage,
   limits: { fileSize: 1024 * 1024 * 1024 * 2 },
   fileFilter: (_req, file, cb) => {
-    const ok = file.fieldname === 'poster' ? /^image\//.test(file.mimetype) : /^(video|application\/octet-stream)/.test(file.mimetype);
-    cb(ok ? null : new Error('Unsupported file type'), ok);
+    if (file.fieldname === 'poster') {
+      return cb(
+        /^image\/(jpeg|jpg|png|webp|gif)$/i.test(file.mimetype)
+          ? null
+          : new Error('Only image files allowed for poster'),
+        /^image\/(jpeg|jpg|png|webp|gif)$/i.test(file.mimetype)
+      );
+    }
+
+    const allowedVideoExtensions = [
+      '.mp4',
+      '.mkv',
+      '.avi',
+      '.mov',
+      '.webm',
+      '.m4v',
+      '.mpeg',
+      '.mpg'
+    ];
+
+    const ext = path.extname(file.originalname).toLowerCase();
+    const ok = allowedVideoExtensions.includes(ext);
+
+    cb(ok ? null : new Error('Unsupported video format'), ok);
   }
 });
 

@@ -16,11 +16,36 @@
 <main id="home">
 <section class="hero"><div><p class="eyebrow">YOUR FREE CINEMA</p><h1>Watch what<br><span>moves you.</span></h1><p class="sub">A clean Netflix-inspired streaming dashboard for your own or licensed video library.</p><div class="heroBtns"><a class="primary" href="#browse">Browse Library</a><a class="secondary" href="#about">How it works</a></div></div></section>
 <section id="browse" class="section"><div class="sectionHead"><h2>Featured</h2><span id="count"></span></div><div id="grid" class="grid"></div></section>
-<section id="live" class="section"><div class="sectionHead"><h2>Live</h2></div><div class="liveCard"><div class="liveDot"></div><div><b>Live channel</b><p>Add your own licensed live stream URL from the Admin panel.</p></div><button onclick="alert('Connect a licensed live-stream URL in the production backend.')">Open player</button></div></section>
-<section id="about" class="section about"><h2>DarkWing</h2><p>This starter is designed for movies and videos you own, public-domain works, or content you are licensed to distribute. It contains no ads and no user payment system.</p></section>
+<section id="live" class="section">
+  <h2>🔴 Live Stream</h2>
+  <p>Watch our live broadcast</p>
+
+  <video
+    id="liveVideo"
+    controls
+    autoplay
+    muted
+    playsinline
+    style="width:100%;max-width:900px;border-radius:12px;background:#000;">
+  </video>
+
+  <p id="liveStatus">🔴 LIVE</p>
+</section>
 </main>
-<div id="modal" class="modal hidden"><div class="modalBox"><button class="close" onclick="closeModal()">×</button><div id="modalBody"></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script>
+const liveVideo = document.getElementById('
+const streamUrl = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+
+if (liveVideo && streamUrl !== 'YAHAN_APNA_LICENSED_M3U8_LINK_DALO') {
+  if (liveVideo.canPlayType('application/vnd.apple.mpegurl')) {
+    liveVideo.src = streamUrl;
+  } else if (Hls.isSupported()) {
+    const hls = new Hls();
+    hls.loadSource(streamUrl);
+    hls.attachMedia(liveVideo);
+  }
+}<script>
 let movies=[];
 const modal=document.getElementById('modal'), body=document.getElementById('modalBody');
 async function load(){ const r=await fetch('/api/movies'); movies=await r.json(); render(); }

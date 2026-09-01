@@ -69,6 +69,7 @@ function adminPanel(){body.innerHTML=`<h2>DarkWing Admin</h2><form id="form"><in
 }
 async function delMovie(id){const r=await fetch('/api/movies/'+id,{method:'DELETE',headers:{Authorization:'Bearer '+localStorage.getItem('dw_token')}});if(r.ok){await load();adminPanel();}else alert('Delete failed');}
 document.getElementById('search').oninput=e=>render(e.target.value);document.getElementById('adminBtn').onclick=admin;load();
+document.getElementById('adminBtn').onclick = admin;
 </script>
 </body>
 </html>

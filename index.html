@@ -1,170 +1,192 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DarkWing — Free Cinema</title>
-<style>*{box-sizing:border-box}
-html{scroll-behavior:smooth}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DarkWing</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
 
 body{
-  margin:0;
-  min-height:100vh;
-  color:#fff;
   font-family:Arial,sans-serif;
+  color:#fff;
+  min-height:100vh;
   background:
-    linear-gradient(to bottom,
-      rgba(0,30,60,.25),
-      rgba(0,160,210,.25),
-      rgba(0,25,70,.70)),
+    linear-gradient(
+      to bottom,
+      rgba(0,25,55,.40),
+      rgba(0,130,190,.25),
+      rgba(0,20,60,.80)
+    ),
     url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=85");
   background-size:cover;
   background-position:center;
   background-attachment:fixed;
 }
 
-.nav{
-  background:rgba(0,15,35,.75);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(80,220,255,.35);
-}
-
-.hero,.section{
-  background:rgba(0,10,30,.30);
-}
-
-body:before{
+/* DARK OVERLAY */
+body::before{
   content:"";
   position:fixed;
   inset:0;
-  pointer-events:none;
   z-index:-1;
   background:
-    linear-gradient(to bottom,
-      transparent 35%,
-      rgba(0,120,180,.18) 55%,
-      rgba(0,10,45,.65) 100%);
-  /* ===== TEXT THEME ===== */
-
-body{
-  color:#ffffff;
-  text-shadow:0 2px 12px rgba(0,0,0,.65);
+    linear-gradient(
+      to bottom,
+      transparent 30%,
+      rgba(0,110,170,.18) 55%,
+      rgba(0,8,35,.72) 100%
+    );
 }
 
-/* Logo */
+/* NAVBAR */
+.nav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  width:100%;
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  gap:20px;
+  padding:12px 5%;
+  background:rgba(0,12,35,.78);
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid rgba(80,220,255,.30);
+}
+
 .logo{
-  font-size:28px;
+  font-size:26px;
   font-weight:900;
-  letter-spacing:2px;
-  color:#ffffff;
+  letter-spacing:3px;
+  white-space:nowrap;
 }
 
 .logo span{
-  color:#35d6ff;
-  text-shadow:0 0 15px rgba(53,214,255,.8);
+  color:#41dcff;
+  text-shadow:0 0 18px rgba(65,220,255,.75);
 }
 
-/* Navigation */
-.nav{
+nav{
   display:flex;
-  gap:22px;
+  gap:8px;
   align-items:center;
 }
 
-.nav a{
-  color:#ffffff;
+nav a{
+  color:#eafaff;
   text-decoration:none;
-  font-weight:700;
-  font-size:16px;
+  font-weight:bold;
   padding:10px 14px;
   border-radius:25px;
   transition:.3s;
 }
 
-.nav a:hover{
-  background:rgba(0,190,255,.22);
-  color:#6ee7ff;
-  box-shadow:0 0 18px rgba(0,200,255,.35);
+nav a:hover{
+  color:#fff;
+  background:rgba(0,190,255,.20);
 }
 
-/* Main hero section */
+/* RIGHT BUTTONS */
+.actions{
+  margin-left:auto;
+  display:flex;
+  gap:10px;
+}
+
+.btn,
+.actions button{
+  padding:11px 18px;
+  border-radius:25px;
+  border:1px solid rgba(100,230,255,.45);
+  background:rgba(0,45,80,.75);
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  text-decoration:none;
+  transition:.3s;
+}
+
+.btn:hover,
+.actions button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 20px rgba(0,210,255,.50);
+}
+
+.primary{
+  background:linear-gradient(135deg,#00c6ff,#0072ff);
+  border:none;
+}
+
+/* HERO */
 .hero{
-  padding:80px 20px;
-  text-align:center;
+  min-height:620px;
+  padding:100px 8%;
+  display:flex;
+  align-items:center;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0,8,30,.82),
+      rgba(0,70,110,.38),
+      rgba(0,0,0,.15)
+    );
+}
+
+.heroContent{
+  max-width:720px;
 }
 
 .eyebrow{
-  color:#65e6ff;
-  font-weight:800;
-  letter-spacing:3px;
+  color:#63e8ff;
+  font-weight:900;
+  letter-spacing:5px;
   font-size:14px;
-  text-transform:uppercase;
+  margin-bottom:18px;
+  text-shadow:0 0 15px rgba(50,220,255,.7);
 }
 
 .hero h1{
-  font-size:clamp(42px,8vw,85px);
-  line-height:1.05;
-  margin:18px 0;
-  font-weight:900;
-  color:#ffffff;
-  text-shadow:0 4px 25px rgba(0,0,0,.8);
+  font-size:clamp(50px,8vw,92px);
+  line-height:.95;
+  margin-bottom:20px;
+  text-shadow:0 5px 25px rgba(0,0,0,.8);
 }
 
 .hero h1 span{
-  color:#4de3ff;
-  text-shadow:0 0 25px rgba(77,227,255,.7);
+  color:#48e0ff;
+  text-shadow:0 0 30px rgba(0,220,255,.75);
 }
 
 .sub{
-  max-width:700px;
-  margin:0 auto 30px;
-  color:#d9f7ff;
+  max-width:600px;
+  color:#e1f8ff;
   font-size:18px;
   line-height:1.7;
 }
 
-/* Buttons */
 .heroBtns{
   display:flex;
-  justify-content:center;
-  gap:15px;
   flex-wrap:wrap;
+  gap:15px;
+  margin-top:30px;
 }
 
-.primary,
-.secondary{
-  display:inline-block;
-  padding:14px 25px;
-  border-radius:30px;
-  text-decoration:none;
-  font-weight:800;
-  transition:.3s;
-}
-
-.primary{
-  background:linear-gradient(135deg,#00b7e8,#0077ff);
-  color:white;
-  box-shadow:0 8px 25px rgba(0,140,255,.4);
-}
-
-.secondary{
-  background:rgba(255,255,255,.12);
-  color:white;
-  border:1px solid rgba(100,230,255,.6);
-  backdrop-filter:blur(10px);
-}
-
-.primary:hover,
-.secondary:hover{
-  transform:translateY(-3px);
-  box-shadow:0 12px 30px rgba(0,180,255,.5);
-}
-
-/* Section heading */
+/* SECTIONS */
 .section{
-  padding:45px 20px;
-  margin:20px auto;
-  max-width:1200px;
+  padding:60px 6%;
+  background:rgba(0,12,35,.38);
+  backdrop-filter:blur(4px);
 }
 
 .sectionHead{
@@ -176,151 +198,542 @@ body{
 
 .sectionHead h2{
   font-size:32px;
-  margin:0;
-  color:#ffffff;
 }
 
 .sectionHead h2::before{
   content:"✦ ";
-  color:#43dfff;
+  color:#49e4ff;
 }
 
-/* Live section */
-#live{
+/* MOVIE GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:rgba(0,35,65,.75);
+  border:1px solid rgba(80,220,255,.28);
+  border-radius:18px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.3s;
+  box-shadow:0 10px 30px rgba(0,0,0,.30);
+}
+
+.card:hover{
+  transform:translateY(-7px);
+  border-color:#56e5ff;
+  box-shadow:0 15px 35px rgba(0,170,255,.28);
+}
+
+.poster{
+  height:270px;
+  background:#09213a center/cover;
+}
+
+.info{
+  padding:15px;
+}
+
+.info h3{
+  margin-bottom:8px;
+}
+
+.muted{
+  color:#b7e9f5;
+  font-size:14px;
+}
+
+/* LIVE */
+.liveCard{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:22px;
+  border-radius:20px;
+  background:rgba(0,45,75,.72);
+  border:1px solid rgba(80,220,255,.32);
+}
+
+.liveDot{
+  width:13px;
+  height:13px;
+  border-radius:50%;
+  background:#ff3b55;
+  box-shadow:0 0 18px #ff3b55;
+}
+
+.liveCard button{
+  margin-left:auto;
+}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  display:grid;
+  place-items:center;
+  padding:20px;
+  background:rgba(0,0,0,.78);
+}
+
+.hidden{
+  display:none;
+}
+
+.modalBox{
+  position:relative;
+  width:min(600px,100%);
+  max-height:90vh;
+  overflow:auto;
+  padding:30px;
+  border-radius:22px;
   background:linear-gradient(
-    135deg,
-    rgba(0,40,80,.72),
-    rgba(0,140,190,.28)
+    145deg,
+    rgba(0,40,75,.98),
+    rgba(0,12,35,.98)
   );
-  border:1px solid rgba(100,220,255,.3);
-  border-radius:25px;
-  padding:35px 20px;
-  backdrop-filter:blur(10px);
+  border:1px solid rgba(80,220,255,.35);
 }
 
-#live h2{
-  font-size:32px;
-  color:#ffffff;
-}
-
-#live p{
-  color:#d5f6ff;
-  font-size:18px;
-}
-
-/* Admin and Account buttons */
-button{
-  padding:10px 18px;
-  border-radius:25px;
-  border:1px solid rgba(100,220,255,.45);
-  background:rgba(0,30,60,.65);
+.close{
+  position:absolute;
+  right:15px;
+  top:10px;
+  border:0;
+  background:transparent;
   color:white;
-  font-weight:bold;
+  font-size:30px;
   cursor:pointer;
 }
 
-button:hover{
-  background:#008fc7;
-  box-shadow:0 0 20px rgba(0,200,255,.5);
+.adminForm{
+  display:grid;
+  gap:12px;
+  margin-top:20px;
 }
 
+.adminForm input,
+.adminForm textarea{
+  width:100%;
+  padding:13px;
+  color:white;
+  background:rgba(0,10,30,.70);
+  border:1px solid rgba(80,220,255,.30);
+  border-radius:10px;
+}
+
+.adminForm button{
+  padding:13px;
+  border:none;
+  border-radius:10px;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  background:linear-gradient(135deg,#00c6ff,#0072ff);
+}
+
+/* MOBILE */
+@media(max-width:750px){
+  .nav{
+    flex-wrap:wrap;
+  }
+
+  nav{
+    order:3;
+    width:100%;
+    justify-content:center;
+  }
+
+  .hero{
+    min-height:560px;
+    padding:80px 7%;
+  }
+
+  .actions{
+    margin-left:auto;
+  }
+
+  .section{
+    padding:45px 5%;
+  }
+
+  .liveCard{
+    flex-wrap:wrap;
+  }
+
+  .liveCard button{
+    margin-left:0;
+  }
+}
 </style>
 </head>
+
 <body>
+
 <header class="nav">
-  <div class="logo">DARK<span>WING</span></div>
+
+  <div class="logo">
+    DARK<span>WING</span>
+  </div>
 
   <nav>
     <a href="#home">Home</a>
     <a href="#browse">Movies</a>
-    <a href="#live">🔴 Server</a>
+    <a href="#live">🔴 Live</a>
+    <a href="#about">About</a>
   </nav>
 
-  <div class="navRight">
-    <button id="adminBtn" onclick="admin()">Admin</button>
-    <button id="accountBtn" onclick="account()">Account</button>
+  <div class="actions">
+    <button id="adminBtn">Admin</button>
+    <button id="accountBtn" class="primary">Account</button>
   </div>
+
 </header>
+
 <main id="home">
 
 <section class="hero">
-  <div>
-    <p class="eyebrow">YOUR FREE CINEMA</p>
-    <h1>Watch what<br><span>moves you.</span></h1>
-    <p class="sub">A clean Netflix-inspired streaming dashboard for your own or licensed video library.</p>
+  <div class="heroContent">
+
+    <div class="eyebrow">MALDIVES CINEMA EXPERIENCE</div>
+
+    <h1>
+      Watch beneath<br>
+      <span>the ocean.</span>
+    </h1>
+
+    <p class="sub">
+      Welcome to DarkWing — your personal streaming library
+      for videos you own or are licensed to distribute.
+    </p>
 
     <div class="heroBtns">
-      <a class="primary" href="#browse">Browse Library</a>
-      <a class="secondary" href="#about">How it works</a>
+      <a class="btn primary" href="#browse">Browse Library</a>
+      <a class="btn" href="#live">Watch Live</a>
     </div>
+
   </div>
 </section>
 
 <section id="browse" class="section">
+
   <div class="sectionHead">
-    <h2>Featured</h2>
+    <h2>Featured Movies</h2>
     <span id="count"></span>
   </div>
+
   <div id="grid" class="grid"></div>
+
 </section>
-<main id="home">
-<main id="home">
-<section class="hero"><div><p class="eyebrow">YOUR FREE CINEMA</p><h1>Watch what<br><span>moves you.</span></h1><p class="sub">A clean Netflix-inspired streaming dashboard for your own or licensed video library.</p><div class="heroBtns"><a class="primary" href="#browse">Browse Library</a><a class="secondary" href="#about">How it works</a></div></div></section>
-<section id="browse" class="section"><div class="sectionHead"><h2>Featured</h2><span id="count"></span></div><div id="grid" class="grid"></div></section>
+
 <section id="live" class="section">
-  <h2>🔴 Live Stream</h2>
-  <p>Watch our live broadcast</p>
 
-  <video
-    id="liveVideo"
-    controls
-    autoplay
-    muted
-    playsinline
-    style="width:100%;max-width:900px;border-radius:12px;background:#000;">
-  </video>
+  <div class="sectionHead">
+    <h2>Live Stream</h2>
+  </div>
 
-  <p id="liveStatus">🔴 LIVE</p>
+  <div class="liveCard">
+
+    <div class="liveDot"></div>
+
+    <div>
+      <b>DarkWing Live Channel</b>
+      <p class="muted">
+        Connect your own licensed live-stream URL.
+      </p>
+    </div>
+
+    <button id="liveBtn" class="btn primary">
+      Open Player
+    </button>
+
+  </div>
+
 </section>
-</main>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<script>
-const liveVideo = document.getElementById('
-const streamUrl = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
 
-if (liveVideo && streamUrl !== 'YAHAN_APNA_LICENSED_M3U8_LINK_DALO') {
-  if (liveVideo.canPlayType('application/vnd.apple.mpegurl')) {
-    liveVideo.src = streamUrl;
-  } else if (Hls.isSupported()) {
-    const hls = new Hls();
-    hls.loadSource(streamUrl);
-    hls.attachMedia(liveVideo);
+<section id="about" class="section">
+
+  <div class="sectionHead">
+    <h2>About DarkWing</h2>
+  </div>
+
+  <p class="sub">
+    DarkWing is designed for your own videos, public-domain
+    content, or videos you have permission or a license to distribute.
+  </p>
+
+</section>
+
+</main>
+
+<!-- MODAL -->
+
+<div id="modal" class="modal hidden">
+
+  <div class="modalBox">
+
+    <button class="close" onclick="closeModal()">×</button>
+
+    <div id="modalBody"></div>
+
+  </div>
+
+</div>
+
+<script>
+
+const starterMovies = [
+
+  {
+    title:"Ocean Lights",
+    year:"2026",
+    genre:"Adventure",
+    poster:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700&q=80"
+  },
+
+  {
+    title:"Blue Horizon",
+    year:"2026",
+    genre:"Drama",
+    poster:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=80"
+  },
+
+  {
+    title:"Island Mystery",
+    year:"2025",
+    genre:"Mystery",
+    poster:"https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=700&q=80"
+  },
+
+  {
+    title:"Deep Blue",
+    year:"2026",
+    genre:"Adventure",
+    poster:"https://images.unsplash.com/photo-1498623116890-37e912163d5d?auto=format&fit=crop&w=700&q=80"
   }
-}<script>
-let movies=[];
-const modal=document.getElementById('modal'), body=document.getElementById('modalBody');
-async function load(){ const r=await fetch('/api/movies'); movies=await r.json(); render(); }
-function render(q=''){
- const list=movies.filter(m=>(m.title+' '+m.genre+' '+m.year).toLowerCase().includes(q.toLowerCase()));
- document.getElementById('count').textContent=list.length+' titles';
- document.getElementById('grid').innerHTML=list.map(m=>`<article class="card" onclick="watch('${m.id}')"><div class="poster" style="background-image:url('${m.poster||''}')"></div><div class="info"><h3>${escapeHtml(m.title)}</h3><div class="muted">${escapeHtml(m.year)} • ${escapeHtml(m.genre)}</div></div></article>`).join('')||'<p>No titles found.</p>';
+
+];
+
+let movies =
+  JSON.parse(localStorage.getItem("darkwing_movies"))
+  || starterMovies;
+
+
+/* SHOW MOVIES */
+
+function renderMovies(){
+
+  document.getElementById("count").textContent =
+    movies.length + " titles";
+
+  document.getElementById("grid").innerHTML =
+    movies.map((movie,index) => `
+
+      <article class="card"
+        onclick="watchMovie(${index})">
+
+        <div class="poster"
+          style="background-image:url('${movie.poster}')">
+        </div>
+
+        <div class="info">
+          <h3>${movie.title}</h3>
+
+          <div class="muted">
+            ${movie.year} • ${movie.genre}
+          </div>
+        </div>
+
+      </article>
+
+    `).join("");
+
 }
-function escapeHtml(x){return String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function watch(id){const m=movies.find(x=>x.id===id); body.innerHTML=`<div class="poster" style="height:360px;background-image:url('${m.poster||''}')"></div><h2>${escapeHtml(m.title)}</h2><p class="muted">${escapeHtml(m.year)} • ${escapeHtml(m.genre)}</p>${m.video?`<video controls style="width:100%;max-height:420px;background:#000;border-radius:10px" src="${m.video}"></video><div style="margin-top:12px"><a class="primary" href="/download/${m.id}">Download</a></div>`:'<p class="muted">No video uploaded yet.</p>'}`; modal.classList.remove('hidden');}
-function closeModal(){modal.classList.add('hidden');}
-async function admin(){
- body.innerHTML=`<h2>DarkWing Admin</h2><p class="muted">Upload and manage your own/licensed media.</p><input id="pw" type="password" placeholder="Admin password" style="width:100%;padding:12px;margin:8px 0"><button onclick="loginAdmin()" style="padding:12px 18px">Continue</button>`; modal.classList.remove('hidden');
+
+
+/* WATCH MOVIE */
+
+function watchMovie(index){
+
+  const movie = movies[index];
+
+  document.getElementById("modalBody").innerHTML = `
+
+    <h2>${movie.title}</h2>
+
+    <p class="muted">
+      ${movie.year} • ${movie.genre}
+    </p>
+
+    <br>
+
+    <p>
+      Add your licensed video URL or connect your
+      production video backend here.
+    </p>
+
+  `;
+
+  document.getElementById("modal")
+    .classList.remove("hidden");
+
 }
-async function loginAdmin(){
- const r=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:document.getElementById('pw').value})});
- if(!r.ok){alert('Wrong password');return;} const d=await r.json(); localStorage.setItem('dw_token',d.token); adminPanel();
+
+
+/* CLOSE MODAL */
+
+function closeModal(){
+
+  document.getElementById("modal")
+    .classList.add("hidden");
+
 }
-function adminPanel(){body.innerHTML=`<h2>DarkWing Admin</h2><form id="form"><input name="title" required placeholder="Movie title"><input name="year" placeholder="Year"><input name="genre" placeholder="Genre"><label>Poster <input name="poster" type="file" accept="image/*"></label><label>Video <input name="video" type="file" accept="video/*"></label><button type="submit">Upload to library</button></form><hr><div id="adminList">${movies.map(m=>`<p><b>${escapeHtml(m.title)}</b> <button onclick="delMovie('${m.id}')">Delete</button></p>`).join('')}</div>`;
- document.getElementById('form').onsubmit=async e=>{e.preventDefault();const fd=new FormData(e.target);const r=await fetch('/api/movies',{method:'POST',headers:{Authorization:'Bearer '+localStorage.getItem('dw_token')},body:fd});if(!r.ok){alert((await r.json()).error||'Upload failed');return;}await load();adminPanel();};
+
+
+/* ADMIN BUTTON */
+
+document.getElementById("adminBtn").onclick = function(){
+
+  document.getElementById("modalBody").innerHTML = `
+
+    <h2>⚙ DarkWing Admin</h2>
+
+    <p class="muted">
+      Add a movie to your personal library.
+    </p>
+
+    <form class="adminForm"
+      onsubmit="addMovie(event)">
+
+      <input id="movieTitle"
+        placeholder="Movie title"
+        required>
+
+      <input id="movieYear"
+        placeholder="Year"
+        required>
+
+      <input id="movieGenre"
+        placeholder="Genre"
+        required>
+
+      <input id="moviePoster"
+        placeholder="Poster image URL"
+        required>
+
+      <input id="movieVideo"
+        placeholder="Licensed video URL (optional)">
+
+      <button type="submit">
+        Add Movie
+      </button>
+
+    </form>
+
+  `;
+
+  document.getElementById("modal")
+    .classList.remove("hidden");
+
+};
+
+
+/* ADD MOVIE */
+
+function addMovie(event){
+
+  event.preventDefault();
+
+  movies.push({
+
+    title:
+      document.getElementById("movieTitle").value,
+
+    year:
+      document.getElementById("movieYear").value,
+
+    genre:
+      document.getElementById("movieGenre").value,
+
+    poster:
+      document.getElementById("moviePoster").value,
+
+    video:
+      document.getElementById("movieVideo").value
+
+  });
+
+  localStorage.setItem(
+    "darkwing_movies",
+    JSON.stringify(movies)
+  );
+
+  closeModal();
+
+  renderMovies();
+
 }
-async function delMovie(id){const r=await fetch('/api/movies/'+id,{method:'DELETE',headers:{Authorization:'Bearer '+localStorage.getItem('dw_token')}});if(r.ok){await load();adminPanel();}else alert('Delete failed');}
-document.getElementById('search').oninput=e=>render(e.target.value);document.getElementById('adminBtn').onclick=admin;load();
-document.getElementById('adminBtn').onclick = admin;
+
+
+/* ACCOUNT BUTTON */
+
+document.getElementById("accountBtn").onclick = function(){
+
+  document.getElementById("modalBody").innerHTML = `
+
+    <h2>👤 My Account</h2>
+
+    <p class="muted">
+      Account and login system can be connected here.
+    </p>
+
+    <br>
+
+    <button class="btn primary"
+      onclick="alert('Login system needs a backend.')">
+
+      Sign In
+
+    </button>
+
+  `;
+
+  document.getElementById("modal")
+    .classList.remove("hidden");
+
+};
+
+
+/* LIVE BUTTON */
+
+document.getElementById("liveBtn").onclick = function(){
+
+  document.getElementById("modalBody").innerHTML = `
+
+    <h2>🔴 DarkWing Live</h2>
+
+    <p class="muted">
+      Add your licensed HLS/live-stream URL
+      in your production backend.
+    </p>
+
+  `;
+
+  document.getElementById("modal")
+    .classList.remove("hidden");
+
+};
+
+
+/* START */
+
+renderMovies();
+
 </script>
+
 </body>
 </html>

@@ -44,7 +44,186 @@ body:before{
       transparent 35%,
       rgba(0,120,180,.18) 55%,
       rgba(0,10,45,.65) 100%);
+  /* ===== TEXT THEME ===== */
+
+body{
+  color:#ffffff;
+  text-shadow:0 2px 12px rgba(0,0,0,.65);
 }
+
+/* Logo */
+.logo{
+  font-size:28px;
+  font-weight:900;
+  letter-spacing:2px;
+  color:#ffffff;
+}
+
+.logo span{
+  color:#35d6ff;
+  text-shadow:0 0 15px rgba(53,214,255,.8);
+}
+
+/* Navigation */
+.nav{
+  display:flex;
+  gap:22px;
+  align-items:center;
+}
+
+.nav a{
+  color:#ffffff;
+  text-decoration:none;
+  font-weight:700;
+  font-size:16px;
+  padding:10px 14px;
+  border-radius:25px;
+  transition:.3s;
+}
+
+.nav a:hover{
+  background:rgba(0,190,255,.22);
+  color:#6ee7ff;
+  box-shadow:0 0 18px rgba(0,200,255,.35);
+}
+
+/* Main hero section */
+.hero{
+  padding:80px 20px;
+  text-align:center;
+}
+
+.eyebrow{
+  color:#65e6ff;
+  font-weight:800;
+  letter-spacing:3px;
+  font-size:14px;
+  text-transform:uppercase;
+}
+
+.hero h1{
+  font-size:clamp(42px,8vw,85px);
+  line-height:1.05;
+  margin:18px 0;
+  font-weight:900;
+  color:#ffffff;
+  text-shadow:0 4px 25px rgba(0,0,0,.8);
+}
+
+.hero h1 span{
+  color:#4de3ff;
+  text-shadow:0 0 25px rgba(77,227,255,.7);
+}
+
+.sub{
+  max-width:700px;
+  margin:0 auto 30px;
+  color:#d9f7ff;
+  font-size:18px;
+  line-height:1.7;
+}
+
+/* Buttons */
+.heroBtns{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.primary,
+.secondary{
+  display:inline-block;
+  padding:14px 25px;
+  border-radius:30px;
+  text-decoration:none;
+  font-weight:800;
+  transition:.3s;
+}
+
+.primary{
+  background:linear-gradient(135deg,#00b7e8,#0077ff);
+  color:white;
+  box-shadow:0 8px 25px rgba(0,140,255,.4);
+}
+
+.secondary{
+  background:rgba(255,255,255,.12);
+  color:white;
+  border:1px solid rgba(100,230,255,.6);
+  backdrop-filter:blur(10px);
+}
+
+.primary:hover,
+.secondary:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 30px rgba(0,180,255,.5);
+}
+
+/* Section heading */
+.section{
+  padding:45px 20px;
+  margin:20px auto;
+  max-width:1200px;
+}
+
+.sectionHead{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
+}
+
+.sectionHead h2{
+  font-size:32px;
+  margin:0;
+  color:#ffffff;
+}
+
+.sectionHead h2::before{
+  content:"✦ ";
+  color:#43dfff;
+}
+
+/* Live section */
+#live{
+  background:linear-gradient(
+    135deg,
+    rgba(0,40,80,.72),
+    rgba(0,140,190,.28)
+  );
+  border:1px solid rgba(100,220,255,.3);
+  border-radius:25px;
+  padding:35px 20px;
+  backdrop-filter:blur(10px);
+}
+
+#live h2{
+  font-size:32px;
+  color:#ffffff;
+}
+
+#live p{
+  color:#d5f6ff;
+  font-size:18px;
+}
+
+/* Admin and Account buttons */
+button{
+  padding:10px 18px;
+  border-radius:25px;
+  border:1px solid rgba(100,220,255,.45);
+  background:rgba(0,30,60,.65);
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#008fc7;
+  box-shadow:0 0 20px rgba(0,200,255,.5);
+}
+
 </style>
 </head>
 <body>

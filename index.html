@@ -680,33 +680,9 @@ function addMovie(event){
 
 
 /* ACCOUNT BUTTON */
-
-document.getElementById("accountBtn").onclick = function(){
-
-  document.getElementById("modalBody").innerHTML = `
-
-    <h2>👤 My Account</h2>
-
-    <p class="muted">
-      Account and login system can be connected here.
-    </p>
-
-    <br>
-
-    <button class="btn primary"
-      onclick="alert('Login system needs a backend.')">
-
-      Sign In
-
-    </button>
-
-  `;
-
-  document.getElementById("modal")
-    .classList.remove("hidden");
-
+document.getElementById("accountBtn").onclick = function() {
+  window.location.href = "login.html";
 };
-
 
 /* LIVE BUTTON */
 

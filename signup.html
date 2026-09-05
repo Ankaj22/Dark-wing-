@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Create Account - DarkWing</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b1020;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .box {
+      width: 90%;
+      max-width: 400px;
+      background: #151b2d;
+      padding: 30px;
+      border-radius: 15px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    p {
+      color: #aab3c5;
+      text-align: center;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      margin-top: 12px;
+      border: 1px solid #303a52;
+      border-radius: 8px;
+      background: #0b1020;
+      color: white;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:active {
+      opacity: 0.8;
+    }
+
+    .message {
+      margin-top: 15px;
+      text-align: center;
+      color: #ffb4b4;
+    }
+
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #60a5fa;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+    <h1>👤 Create Account</h1>
+
+    <p>Join DarkWing</p>
+
+    <input
+      type="text"
+      id="username"
+      placeholder="Choose Username"
+      required
+    >
+
+    <input
+      type="password"
+      id="password"
+      placeholder="Choose Password"
+      required
+    >
+
+    <button onclick="createAccount()">
+      Create Account
+    </button>
+
+    <div class="message" id="message"></div>
+
+    <a href="/login.html">
+      Already have an account? Sign In
+    </a>
+  </div>
+
+  <script>
+    async function createAccount() {
+
+      const username =
+        document.getElementById("username").value.trim();
+
+      const password =
+        document.getElementById("password").value;
+
+      const message =
+        document.getElementById("message");
+
+      if (!username || !password) {
+        message.textContent =
+          "Please enter username and password.";
+        return;
+      }
+
+      try {
+
+        const response = await fetch("/api/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            username: username,
+            password: password
+          })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          message.style.color = "#86efac";
+          message.textContent =
+            "Account created successfully! Redirecting...";
+
+          setTimeout(() => {
+            window.location.href = "/login.html";
+          }, 1500);
+
+        } else {
+          message.style.color = "#ffb4b4";
+          message.textContent =
+            data.error || "Could not create account.";
+        }
+
+      } catch (error) {
+        message.textContent =
+          "Server error. Please try again.";
+      }
+
+    }
+  </script>
+
+</body>
+</html>

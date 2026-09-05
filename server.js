@@ -178,6 +178,9 @@ app.post("/api/user-login", (req, res) => {
 app.get("/login.html", (req, res) => {
   res.sendFile(path.join(__dirname, "login.html"));
 });
+app.get("/signup.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "signup.html"));
+});
 app.use('/uploads', express.static(UPLOAD_DIR));
 app.use((err, _req, res, _next) => res.status(400).json({ error: err.message || 'Upload failed' }));
 app.listen(PORT, () => console.log(`DarkWing running on http://localhost:${PORT}`));

@@ -104,6 +104,77 @@ app.get('/download/:id', (req, res) => {
   if (!fs.existsSync(file)) return res.status(404).send('Video not found');
   res.download(file, movie.originalVideoName || `${movie.title}.mp4`);
 });
+// USER ACCOUNTS
+const USERS_FILE = path.join(__dirname, "users.json");
+
+function readUsers() {
+  if (!fs.existsSync(USERS_FILE)) return [];
+  return JSON.parse(fs.readFileSync(USERS_FILE, "utf8") || "[]");
+}
+
+function writeUsers(users) {
+  fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
+}
+
+// CREATE NEW ACCOUNT
+app.post("/api/register", (req, res) => {
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    return res.status(400).json({
+      error: "Username and password are required"
+    });
+  }
+
+  const users = readUsers();
+
+  const exists = users.find(
+    user => user.username.toLowerCase() === username.toLowerCase()
+  );
+
+  if (exists) {
+    return res.status(400).json({
+      error: "Username already exists"
+    });
+  }
+
+  users.push({
+    id: crypto.randomUUID(),
+    username: username.trim(),
+    password: password
+  });
+
+  writeUsers(users);
+
+  res.json({
+    ok: true,
+    message: "Account created successfully"
+  });
+});
+
+// USER LOGIN
+app.post("/api/user-login", (req, res) => {
+  const { username, password } = req.body;
+
+  const users = readUsers();
+
+  const user = users.find(
+    u =>
+      u.username.toLowerCase() === String(username).toLowerCase() &&
+      u.password === password
+  );
+
+  if (!user) {
+    return res.status(401).json({
+      error: "Invalid username or password"
+    });
+  }
+
+  res.json({
+    ok: true,
+    username: user.username
+  });
+});
 app.get("/login.html", (req, res) => {
   res.sendFile(path.join(__dirname, "login.html"));
 });

@@ -241,32 +241,72 @@
 
   </div>
 
-<script>
-  const password = document.getElementById("current-password");
-  const togglePassword = document.getElementById("togglePassword");
-  const loginForm = document.getElementById("loginForm");
-  const message = document.getElementById("message");
+<script type="module">
+import { initializeApp } from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
-  togglePassword.addEventListener("click", function () {
-    if (password.type === "password") {
-      password.type = "text";
-      togglePassword.textContent = "🙈";
-      togglePassword.setAttribute("aria-label", "Hide password");
-    } else {
-      password.type = "password";
-      togglePassword.textContent = "👁";
-      togglePassword.setAttribute("aria-label", "Show password");
-    }
-  });
+import {
+  getAuth,
+  signInWithEmailAndPassword
+} from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
-  loginForm.addEventListener("submit", function (e) {
-    e.preventDefault();
+const firebaseConfig = {
+  apiKey: "AIzaSyC8Hfx0E7OpnfclF7UGYVcmdU38yuxtsBY",
+  authDomain: "darkwing-a717a.firebaseapp.com",
+  projectId: "darkwing-a717a",
+  storageBucket: "darkwing-a717a.firebasestorage.app",
+  messagingSenderId: "352453390196",
+  appId: "1:352453390196:web:c141c98aa05c58133a4621"
+};
 
-    // Yahan baad me tumhara real backend/API login code lagega.
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+const password = document.getElementById("current-password");
+const togglePassword = document.getElementById("togglePassword");
+const loginForm = document.getElementById("loginForm");
+const message = document.getElementById("message");
+
+togglePassword.addEventListener("click", function () {
+  if (password.type === "password") {
+    password.type = "text";
+    togglePassword.textContent = "🙈";
+  } else {
+    password.type = "password";
+    togglePassword.textContent = "👁";
+  }
+});
+
+loginForm.addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const email = document.getElementById("email").value.trim();
+  const userPassword = password.value;
+
+  if (!email || !userPassword) {
     message.style.display = "block";
-    message.textContent =
-      "Login system is ready. Connect your backend to authenticate users.";
-  });
+    message.textContent = "Please enter email and password.";
+    return;
+  }
+
+  try {
+    await signInWithEmailAndPassword(auth, email, userPassword);
+
+    message.style.display = "block";
+    message.style.color = "#86efac";
+    message.textContent = "Login successful!";
+
+    setTimeout(function () {
+      window.location.href = "/";
+    }, 1000);
+
+  } catch (error) {
+    message.style.display = "block";
+    message.style.color = "#ffb4b4";
+    message.textContent = error.message;
+  }
+});
 </script>
 
 </body>

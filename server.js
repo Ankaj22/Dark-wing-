@@ -104,7 +104,9 @@ app.get('/download/:id', (req, res) => {
   if (!fs.existsSync(file)) return res.status(404).send('Video not found');
   res.download(file, movie.originalVideoName || `${movie.title}.mp4`);
 });
-
+app.get("/login.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "login.html"));
+});
 app.use('/uploads', express.static(UPLOAD_DIR));
 app.use((err, _req, res, _next) => res.status(400).json({ error: err.message || 'Upload failed' }));
 app.listen(PORT, () => console.log(`DarkWing running on http://localhost:${PORT}`));

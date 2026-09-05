@@ -1,485 +1,711 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+<title>Create Account - DarkWing</title>
 
-  <title>Sign Up - DarkWing</title>
+<style>
+*{
+  box-sizing:border-box;
+}
 
-  <style>
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,sans-serif;
+  background:#0b1020;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
 
-    * {
-      box-sizing: border-box;
-    }
+.box{
+  width:100%;
+  max-width:420px;
+  background:#151b2d;
+  padding:28px;
+  border-radius:18px;
+}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background: #0b1020;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
+h1{
+  text-align:center;
+  margin:0 0 8px;
+}
 
-    .box {
-      width: 100%;
-      max-width: 420px;
-      background: #151b2d;
-      padding: 28px;
-      border-radius: 18px;
-      box-shadow: 0 10px 40px rgba(0,0,0,.35);
-    }
+.subtitle{
+  text-align:center;
+  color:#aab3c5;
+  margin-bottom:20px;
+}
 
-    h1 {
-      text-align: center;
-      margin: 0 0 8px;
-    }
+input{
+  width:100%;
+  padding:14px;
+  margin-top:10px;
+  border:1px solid #303a52;
+  border-radius:9px;
+  background:#0b1020;
+  color:white;
+  font-size:16px;
+}
 
-    .subtitle {
-      text-align: center;
-      color: #aab3c5;
-      margin-bottom: 22px;
-    }
+.primary,
+.social-btn{
+  width:100%;
+  padding:14px;
+  margin-top:12px;
+  border-radius:9px;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
 
-    input,
-    select {
-      width: 100%;
-      padding: 14px;
-      margin-top: 10px;
-      border: 1px solid #303a52;
-      border-radius: 9px;
-      background: #0b1020;
-      color: white;
-      font-size: 16px;
-    }
+.primary{
+  border:none;
+  background:#2563eb;
+  font-weight:bold;
+}
 
-    .phone-row {
-      display: flex;
-      gap: 8px;
-    }
+.social-btn{
+  border:1px solid #303a52;
+  background:#20283b;
+}
 
-    .country-code {
-      width: 130px;
-      flex-shrink: 0;
-    }
+.divider{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:22px 0;
+  color:#8c96aa;
+  font-size:13px;
+}
 
-    .phone-input {
-      flex: 1;
-    }
+.divider:before,
+.divider:after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:#303a52;
+}
 
-    .primary {
-      width: 100%;
-      padding: 14px;
-      margin-top: 18px;
-      border: none;
-      border-radius: 9px;
-      background: #2563eb;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+.message{
+  min-height:22px;
+  margin-top:15px;
+  text-align:center;
+}
 
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 22px 0;
-      color: #8c96aa;
-    }
+#phoneSection,
+#otpSection{
+  display:none;
+}
 
-    .divider::before,
-    .divider::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: #303a52;
-    }
+.phone-row{
+  display:flex;
+  gap:8px;
+}
 
-    .social-btn {
-      width: 100%;
-      padding: 13px;
-      margin-top: 10px;
-      border: 1px solid #303a52;
-      border-radius: 9px;
-      background: #20283b;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-    }
+.phone-row input{
+  flex:1;
+}
 
-    .message {
-      min-height: 20px;
-      margin-top: 15px;
-      text-align: center;
-      color: #ffb4b4;
-    }
+.country{
+  width:120px;
+  padding:14px;
+  margin-top:10px;
+  border:1px solid #303a52;
+  border-radius:9px;
+  background:#0b1020;
+  color:white;
+}
 
-    .login-link {
-      text-align: center;
-      margin-top: 22px;
-    }
+a{
+  color:#60a5fa;
+  text-decoration:none;
+}
 
-    a {
-      color: #60a5fa;
-      text-decoration: none;
-    }
-
-  </style>
+.login-link{
+  text-align:center;
+  margin-top:22px;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="box">
+<div class="box">
 
-    <h1>👤 Create Account</h1>
+<h1>👤 Create Account</h1>
 
-    <p class="subtitle">
-      Join DarkWing
-    </p>
+<p class="subtitle">Join DarkWing</p>
 
 
-    <!-- EMAIL / USERNAME -->
+<input
+  type="email"
+  id="email"
+  placeholder="Email Address"
+>
 
-    <input
-      type="text"
-      id="username"
-      placeholder="Username"
-      autocomplete="username"
-    >
 
-    <input
-      type="email"
-      id="email"
-      placeholder="Email Address"
-      autocomplete="email"
-    >
+<input
+  type="password"
+  id="password"
+  placeholder="Create Password (minimum 6 characters)"
+>
 
-    <input
-      type="password"
-      id="password"
-      placeholder="Create Password"
-      autocomplete="new-password"
-    >
 
+<button
+  class="primary"
+  onclick="emailSignup()"
+>
+Create Account with Email
+</button>
 
-    <!-- PHONE NUMBER -->
 
-    <div class="phone-row">
+<div class="divider">
+OR CONTINUE WITH
+</div>
 
-      <select
-        id="countryCode"
-        class="country-code"
-      >
 
-        <option value="+1">🇺🇸 +1</option>
-        <option value="+44">🇬🇧 +44</option>
-        <option value="+91" selected>🇮🇳 +91</option>
-        <option value="+960">🇲🇻 +960</option>
-        <option value="+971">🇦🇪 +971</option>
-        <option value="+966">🇸🇦 +966</option>
-        <option value="+974">🇶🇦 +974</option>
-        <option value="+65">🇸🇬 +65</option>
-        <option value="+60">🇲🇾 +60</option>
-        <option value="+66">🇹🇭 +66</option>
-        <option value="+61">🇦🇺 +61</option>
-        <option value="+49">🇩🇪 +49</option>
-        <option value="+33">🇫🇷 +33</option>
+<button
+  class="social-btn"
+  onclick="googleSignup()"
+>
+🔵 Continue with Google
+</button>
 
-      </select>
 
-      <input
-        type="tel"
-        id="phone"
-        class="phone-input"
-        placeholder="Phone Number"
-        inputmode="tel"
-      >
+<button
+  class="social-btn"
+  onclick="facebookSignup()"
+>
+🔵 Continue with Facebook
+</button>
 
-    </div>
 
+<button
+  class="social-btn"
+  onclick="appleSignup()"
+>
+ Continue with Apple
+</button>
 
-    <!-- CREATE ACCOUNT -->
 
-    <button
-      class="primary"
-      onclick="createAccount()"
-    >
-      Create Account
-    </button>
+<button
+  class="social-btn"
+  onclick="showPhone()"
+>
+📱 Continue with Phone Number
+</button>
 
 
-    <div class="divider">
-      OR SIGN UP WITH
-    </div>
+<div id="phoneSection">
 
+<div class="phone-row">
 
-    <!-- GOOGLE -->
+<select
+  id="countryCode"
+  class="country"
+>
 
-    <button
-      class="social-btn"
-      onclick="signupGoogle()"
-    >
-      🔵 Continue with Google
-    </button>
+<option value="+1">+1 USA/Canada</option>
+<option value="+44">+44 UK</option>
+<option value="+91" selected>+91 India</option>
+<option value="+960">+960 Maldives</option>
+<option value="+971">+971 UAE</option>
+<option value="+966">+966 Saudi Arabia</option>
+<option value="+974">+974 Qatar</option>
+<option value="+65">+65 Singapore</option>
+<option value="+60">+60 Malaysia</option>
+<option value="+66">+66 Thailand</option>
+<option value="+61">+61 Australia</option>
+<option value="+49">+49 Germany</option>
+<option value="+33">+33 France</option>
 
+</select>
 
-    <!-- FACEBOOK -->
 
-    <button
-      class="social-btn"
-      onclick="signupFacebook()"
-    >
-      🔵 Continue with Facebook
-    </button>
+<input
+  type="tel"
+  id="phone"
+  placeholder="Phone Number"
+>
 
+</div>
 
-    <!-- APPLE -->
 
-    <button
-      class="social-btn"
-      onclick="signupApple()"
-    >
-       Continue with Apple
-    </button>
+<button
+  class="primary"
+  onclick="sendOTP()"
+>
+Send OTP
+</button>
 
+</div>
 
-    <!-- PHONE OTP -->
 
-    <button
-      class="social-btn"
-      onclick="signupPhone()"
-    >
-      📱 Continue with Phone Number
-    </button>
+<div id="otpSection">
 
+<input
+  type="text"
+  id="otp"
+  placeholder="Enter OTP"
+>
 
-    <div
-      class="message"
-      id="message"
-    ></div>
 
+<button
+  class="primary"
+  onclick="verifyOTP()"
+>
+Verify OTP
+</button>
 
-    <div class="login-link">
+</div>
 
-      Already have an account?
 
-      <br><br>
+<!-- Firebase Phone Auth reCAPTCHA -->
 
-      <a href="/login.html">
-        Sign In
-      </a>
+<div id="recaptcha-container"></div>
 
-    </div>
 
-  </div>
+<div
+  class="message"
+  id="message"
+></div>
 
 
-  <script>
+<div class="login-link">
 
-    async function createAccount() {
+Already have an account?
 
-      const username =
-        document.getElementById("username")
-        .value
-        .trim();
+<br><br>
 
-      const email =
-        document.getElementById("email")
-        .value
-        .trim();
+<a href="/login.html">
+Sign In
+</a>
 
-      const password =
-        document.getElementById("password")
-        .value;
+</div>
 
-      const countryCode =
-        document.getElementById("countryCode")
-        .value;
+</div>
 
-      const phone =
-        document.getElementById("phone")
-        .value
-        .trim();
 
-      const message =
-        document.getElementById("message");
+<script type="module">
 
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
-      if (!username) {
+import {
 
-        message.textContent =
-          "Please enter a username.";
+  getAuth,
 
-        return;
+  createUserWithEmailAndPassword,
 
-      }
+  GoogleAuthProvider,
 
+  FacebookAuthProvider,
 
-      if (!email) {
+  OAuthProvider,
 
-        message.textContent =
-          "Please enter your email.";
+  signInWithPopup,
 
-        return;
+  RecaptchaVerifier,
 
-      }
+  signInWithPhoneNumber
 
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-      if (password.length < 6) {
 
-        message.textContent =
-          "Password must be at least 6 characters.";
+/* =========================================
+   PASTE YOUR FIREBASE CONFIG HERE
+========================================= */
 
-        return;
+const firebaseConfig = {
 
-      }
+  apiKey: "PASTE_YOUR_API_KEY",
 
+  authDomain: "PASTE_YOUR_AUTH_DOMAIN",
 
-      message.style.color = "#ffffff";
+  projectId: "PASTE_YOUR_PROJECT_ID",
 
-      message.textContent =
-        "Creating account...";
+  storageBucket: "PASTE_YOUR_STORAGE_BUCKET",
 
+  messagingSenderId: "PASTE_YOUR_MESSAGING_SENDER_ID",
 
-      try {
+  appId: "PASTE_YOUR_APP_ID"
 
-        const response =
-          await fetch("/api/register", {
+};
 
-            method: "POST",
 
-            headers: {
-              "Content-Type": "application/json"
-            },
+/* FIREBASE START */
 
-            body: JSON.stringify({
+const app =
+  initializeApp(firebaseConfig);
 
-              username: username,
+const auth =
+  getAuth(app);
 
-              email: email,
 
-              password: password,
+/* MESSAGE */
 
-              phone: phone
-                ? countryCode + phone
-                : ""
+function showMessage(text,color="#ffb4b4"){
 
-            })
+  const message =
+    document.getElementById("message");
 
-          });
+  message.textContent = text;
 
+  message.style.color = color;
 
-        const data =
-          await response.json();
+}
 
 
-        if (response.ok) {
+/* EMAIL SIGNUP */
 
-          message.style.color =
-            "#86efac";
+window.emailSignup =
+async function(){
 
-          message.textContent =
-            "Account created successfully!";
+  const email =
+    document.getElementById("email")
+    .value
+    .trim();
 
-          setTimeout(function() {
+  const password =
+    document.getElementById("password")
+    .value;
 
-            window.location.href =
-              "/login.html";
 
-          }, 1500);
+  if(!email || !password){
 
-        } else {
+    showMessage(
+      "Enter email and password."
+    );
 
-          message.style.color =
-            "#ffb4b4";
+    return;
 
-          message.textContent =
-            data.error ||
-            "Could not create account.";
+  }
 
-        }
 
+  if(password.length < 6){
 
-      } catch (error) {
+    showMessage(
+      "Password must be at least 6 characters."
+    );
 
-        message.style.color =
-          "#ffb4b4";
+    return;
 
-        message.textContent =
-          "Server error. Please try again.";
+  }
 
-      }
 
-    }
+  try{
 
+    await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
 
-    function signupGoogle() {
+
+    showMessage(
+      "Account created successfully!",
+      "#86efac"
+    );
+
+
+    setTimeout(function(){
 
       window.location.href =
-        "/api/auth/google";
+        "/";
 
-    }
-
-
-    function signupFacebook() {
-
-      window.location.href =
-        "/api/auth/facebook";
-
-    }
+    },1500);
 
 
-    function signupApple() {
+  }catch(error){
 
-      window.location.href =
-        "/api/auth/apple";
+    showMessage(
+      error.message
+    );
 
-    }
+  }
 
-
-    function signupPhone() {
-
-      const countryCode =
-        document.getElementById("countryCode")
-        .value;
-
-      const phone =
-        document.getElementById("phone")
-        .value
-        .trim();
-
-      const message =
-        document.getElementById("message");
+};
 
 
-      if (!phone) {
+/* GOOGLE */
 
-        message.style.color =
-          "#ffb4b4";
+window.googleSignup =
+async function(){
 
-        message.textContent =
-          "Enter your phone number first.";
+  try{
 
-        return;
-
-      }
+    const provider =
+      new GoogleAuthProvider();
 
 
-      window.location.href =
-        "/phone-login.html?phone=" +
-        encodeURIComponent(
-          countryCode + phone
+    await signInWithPopup(
+      auth,
+      provider
+    );
+
+
+    showMessage(
+      "Google login successful!",
+      "#86efac"
+    );
+
+
+    setTimeout(function(){
+
+      window.location.href = "/";
+
+    },1000);
+
+
+  }catch(error){
+
+    showMessage(
+      error.message
+    );
+
+  }
+
+};
+
+
+/* FACEBOOK */
+
+window.facebookSignup =
+async function(){
+
+  try{
+
+    const provider =
+      new FacebookAuthProvider();
+
+
+    await signInWithPopup(
+      auth,
+      provider
+    );
+
+
+    showMessage(
+      "Facebook login successful!",
+      "#86efac"
+    );
+
+
+    setTimeout(function(){
+
+      window.location.href = "/";
+
+    },1000);
+
+
+  }catch(error){
+
+    showMessage(
+      error.message
+    );
+
+  }
+
+};
+
+
+/* APPLE */
+
+window.appleSignup =
+async function(){
+
+  try{
+
+    const provider =
+      new OAuthProvider(
+        "apple.com"
+      );
+
+
+    await signInWithPopup(
+      auth,
+      provider
+    );
+
+
+    showMessage(
+      "Apple login successful!",
+      "#86efac"
+    );
+
+
+    setTimeout(function(){
+
+      window.location.href = "/";
+
+    },1000);
+
+
+  }catch(error){
+
+    showMessage(
+      error.message
+    );
+
+  }
+
+};
+
+
+/* SHOW PHONE */
+
+window.showPhone =
+function(){
+
+  document
+    .getElementById("phoneSection")
+    .style.display = "block";
+
+};
+
+
+/* PHONE RECAPTCHA */
+
+let confirmationResult;
+
+let recaptchaVerifier;
+
+
+window.sendOTP =
+async function(){
+
+  const countryCode =
+    document.getElementById("countryCode")
+    .value;
+
+  const phone =
+    document.getElementById("phone")
+    .value
+    .trim();
+
+
+  if(!phone){
+
+    showMessage(
+      "Enter your phone number."
+    );
+
+    return;
+
+  }
+
+
+  const fullPhone =
+    countryCode + phone;
+
+
+  try{
+
+    if(!recaptchaVerifier){
+
+      recaptchaVerifier =
+        new RecaptchaVerifier(
+          auth,
+          "recaptcha-container",
+          {
+            size:"normal"
+          }
         );
 
     }
 
-  </script>
+
+    confirmationResult =
+      await signInWithPhoneNumber(
+        auth,
+        fullPhone,
+        recaptchaVerifier
+      );
+
+
+    document
+      .getElementById("otpSection")
+      .style.display = "block";
+
+
+    showMessage(
+      "OTP sent successfully!",
+      "#86efac"
+    );
+
+
+  }catch(error){
+
+    showMessage(
+      error.message
+    );
+
+  }
+
+};
+
+
+/* VERIFY OTP */
+
+window.verifyOTP =
+async function(){
+
+  const otp =
+    document.getElementById("otp")
+    .value
+    .trim();
+
+
+  if(!otp){
+
+    showMessage(
+      "Enter OTP."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    await confirmationResult.confirm(
+      otp
+    );
+
+
+    showMessage(
+      "Phone verified successfully!",
+      "#86efac"
+    );
+
+
+    setTimeout(function(){
+
+      window.location.href = "/";
+
+    },1000);
+
+
+  }catch(error){
+
+    showMessage(
+      "Invalid OTP. Please try again."
+    );
+
+  }
+
+};
+
+</script>
 
 </body>
 </html>
+      
